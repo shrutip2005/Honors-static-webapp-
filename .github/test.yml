@@ -1,0 +1,33 @@
+name: Static Website Tests
+
+on:
+  push:
+    branches:
+      - testing-branch   # change if your branch name is different
+
+  pull_request:
+    branches:
+      - main             # runs when merging into main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout your code
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 3. Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Run Jest tests
+      - name: Run Tests
+        run: npm test
